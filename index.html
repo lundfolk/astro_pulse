@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анастасия Аллагузина — Астролог</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #c9a961;
+            --accent-light: #e5c98a;
+            --text: #f0f0f0;
+            --text-muted: #b8b8b8;
+            --purple: #4a1a6b;
+            --purple-light: #6b2d8b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--purple) 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-text .tagline {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--accent);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.3);
+        }
+
+        section {
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.05rem;
+        }
+
+        .about {
+            background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .services {
+            background: var(--primary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(74, 26, 107, 0.3) 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.1);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .service-card .questions {
+            margin: 1.5rem 0;
+        }
+
+        .service-card .questions p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-card .questions p::before {
+            content: '?';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .service-card .benefits {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(201, 169, 97, 0.2);
+            flex-grow: 1;
+        }
+
+        .service-card .benefits p {
+            color: var(--text);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-card .benefits p::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .service-order-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem 2rem;
+            margin-top: 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid var(--accent);
+            font-size: 1rem;
+        }
+
+        .service-order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.3);
+            background: transparent;
+            color: var(--accent);
+        }
+
+        .process {
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .step p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .portfolio {
+            background: var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-card {
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(74, 26, 107, 0.3) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            overflow: hidden;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.15);
+        }
+
+        .portfolio-card-header {
+            padding: 2rem 2rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .portfolio-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            color: white;
+        }
+
+        .portfolio-icon.pdf {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .portfolio-icon.docx {
+            background: linear-gradient(135deg, #2980b9 0%, #1a5276 100%);
+        }
+
+        .portfolio-card-header-info {
+            flex: 1;
+        }
+
+        .portfolio-card-header-info h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .portfolio-file-type {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .portfolio-card-body {
+            padding: 1rem 2rem 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(201, 169, 97, 0.15);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent-light);
+        }
+
+        .portfolio-view-btn {
+            display: block;
+            width: 100%;
+            padding: 0.9rem;
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .portfolio-view-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--secondary);
+            border-radius: 20px;
+            border: 1px solid var(--accent);
+            max-width: 900px;
+            width: 100%;
+            max-height: 85vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(201, 169, 97, 0.05);
+        }
+
+        .modal-header h3 {
+            color: var(--accent);
+            font-size: 1.4rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(201, 169, 97, 0.15);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            overflow-y: auto;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .modal-body h2, .modal-body h3, .modal-body h4 {
+            color: var(--accent);
+            margin: 1.5rem 0 0.8rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-body h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .modal-body h3 {
+            font-size: 1.2rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body ul, .modal-body ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-body strong {
+            color: var(--text);
+        }
+
+        .modal-body .check-list li {
+            list-style: none;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .modal-body .check-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .modal-body .cross-list li {
+            list-style: none;
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .modal-body .cross-list li::before {
+            content: '×';
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .reviews {
+            background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, var(--primary) 0%, rgba(74, 26, 107, 0.3) 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.1);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-author {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .review-service {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: rgba(201, 169, 97, 0.2);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-text::before {
+            content: '«';
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .review-text::after {
+            content: '»';
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .stars-badge {
+            display: flex;
+            gap: 0.3rem;
+            justify-content: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .star-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--accent);
+        }
+
+        .faq {
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(74, 26, 107, 0.3) 100%);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(201, 169, 97, 0.1);
+        }
+
+        .faq-question h3 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0;
+            flex: 1;
+            padding-right: 1rem;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .faq-answer p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-dark-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--primary);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+
+        .cta-dark-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .pricing {
+            background: var(--secondary);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, var(--primary) 0%, rgba(74, 26, 107, 0.3) 100%);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Популярное';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--text);
+            margin: 1.5rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-card ul li {
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pricing-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .disclaimer {
+            background: var(--primary);
+            padding: 3rem 2rem;
+        }
+
+        .disclaimer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            border-radius: 15px;
+            background: rgba(22, 33, 62, 0.5);
+        }
+
+        .disclaimer-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--purple) 100%);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--text);
+            text-decoration: none;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .contact-button:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+            transition: color 0.3s;
+        }
+
+        .contact-button:hover .contact-icon {
+            color: var(--primary);
+        }
+
+        footer {
+            background: var(--primary);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-question {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 0 1.5rem 1.2rem;
+            }
+
+            .cta-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-content p {
+                font-size: 1rem;
+            }
+
+            .modal {
+                max-height: 90vh;
+                margin: 1rem;
+            }
+
+            .modal-header {
+                padding: 1rem 1.5rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <nav>
+        <ul>
+            <li><a href="#about">Обо мне</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#portfolio">Портфолио</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
+            <li><a href="#faq">Вопросы</a></li>
+            <li><a href="#pricing">Стоимость</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Анастасия Аллагузина</h1>
+                <p class="subtitle">Профессиональный астролог</p>
+                <p class="tagline">Помогу увидеть картину целиком и обозначить возможные направления для размышления</p>
+                <a href="#contact" class="cta-button">Записаться на консультацию</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Мой подход</h2>
+            <div class="about-content">
+                <p>Мы бережно рассмотрим Ваш запрос через анализ натальной карты и обсудим, что делать и в каком направлении лучше двигаться.</p>
+                <p>Консультация основана на астрологических данных. Я не гадаю — я анализирую.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M32 4L38.5 22.5L58 24L43 37.5L47 57L32 47L17 57L21 37.5L6 24L25.5 22.5L32 4Z" stroke="currentColor" stroke-width="2" fill="rgba(201,169,97,0.15)"/>
+                        <circle cx="32" cy="32" r="6" fill="currentColor"/>
+                    </svg>
+                    <h3>Натал-портрет</h3>
+                    <div class="questions">
+                        <p>Кто я?</p>
+                        <p>Какие мои сильные стороны?</p>
+                        <p>В каких сферах реализовываться?</p>
+                        <p>Какие особенности характера стоит учитывать?</p>
+                    </div>
+                    <div class="benefits">
+                        <p>Описание личности</p>
+                        <p>Сильные стороны</p>
+                        <p>Зоны развития</p>
+                        <p>Рекомендации по реализации потенциала</p>
+                    </div>
+                    <a href="#contact" class="service-order-btn">Заказать</a>
+                </div>
+
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="22" stroke="currentColor" stroke-width="2" fill="rgba(201,169,97,0.15)"/>
+                        <circle cx="32" cy="32" r="14" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="32" cy="32" r="6" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="32" cy="10" r="2" fill="currentColor"/>
+                        <circle cx="32" cy="54" r="2" fill="currentColor"/>
+                        <circle cx="10" cy="32" r="2" fill="currentColor"/>
+                        <circle cx="54" cy="32" r="2" fill="currentColor"/>
+                    </svg>
+                    <h3>Прогноз</h3>
+                    <div class="questions">
+                        <p>Что важно в ближайшее время?</p>
+                        <p>На чём сосредоточиться?</p>
+                        <p>Какие темы будут наиболее актуальны?</p>
+                    </div>
+                    <div class="benefits">
+                        <p>Описание периода</p>
+                        <p>Основные темы</p>
+                        <p>Рекомендации и фокусы внимания</p>
+                    </div>
+                    <a href="#contact" class="service-order-btn">Заказать</a>
+                </div>
+
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="22" cy="28" r="12" stroke="currentColor" stroke-width="2" fill="rgba(201,169,97,0.15)"/>
+                        <circle cx="42" cy="28" r="12" stroke="currentColor" stroke-width="2" fill="rgba(201,169,97,0.15)"/>
+                        <circle cx="32" cy="44" r="12" stroke="currentColor" stroke-width="2" fill="rgba(201,169,97,0.15)"/>
+                        <circle cx="22" cy="28" r="3" fill="currentColor"/>
+                        <circle cx="42" cy="28" r="3" fill="currentColor"/>
+                        <circle cx="32" cy="44" r="3" fill="currentColor"/>
+                    </svg>
+                    <h3>Совместимость</h3>
+                    <div class="questions">
+                        <p>Почему возникают сложности?</p>
+                        <p>Насколько легко взаимодействовать?</p>
+                        <p>Какие сильные стороны есть у пары?</p>
+                    </div>
+                    <div class="benefits">
+                        <p>Анализ взаимодействия</p>
+                        <p>Точки напряжения</p>
+                        <p>Ресурсы отношений</p>
+                        <p>Рекомендации по коммуникации</p>
+                    </div>
+                    <a href="#contact" class="service-order-btn">Заказать</a>
+                </div>
+
+                <div class="service-card">
+                    <svg class="service-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="10" fill="currentColor"/>
+                        <g stroke="currentColor" stroke-width="2">
+                            <line x1="32" y1="6" x2="32" y2="14"/>
+                            <line x1="32" y1="50" x2="32" y2="58"/>
+                            <line x1="6" y1="32" x2="14" y2="32"/>
+                            <line x1="50" y1="32" x2="58" y2="32"/>
+                            <line x1="13.5" y1="13.5" x2="19" y2="19"/>
+                            <line x1="45" y1="45" x2="50.5" y2="50.5"/>
+                            <line x1="13.5" y1="50.5" x2="19" y2="45"/>
+                            <line x1="45" y1="19" x2="50.5" y2="13.5"/>
+                        </g>
+                    </svg>
+                    <h3>Соляр</h3>
+                    <div class="questions">
+                        <p>Какие темы будут актуальны в ваш личный год?</p>
+                        <p>На чём сосредоточиться?</p>
+                        <p>Какие возможности откроются?</p>
+                    </div>
+                    <div class="benefits">
+                        <p>Анализ солярной карты</p>
+                        <p>Ключевые темы года</p>
+                        <p>Рекомендации на период</p>
+                    </div>
+                    <a href="#contact" class="service-order-btn">Заказать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="process">
+        <div class="container">
+            <h2 class="section-title">Как мы работаем</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Данные</h3>
+                    <p>Пришлите дату, точное время и место рождения. Если точное время неизвестно — укажите это.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Вопросы</h3>
+                    <p>Напишите вопросы, которые вас волнуют. Это поможет сфокусировать анализ.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Анализ</h3>
+                    <p>Я изучу карту в течение 2–3 дней и подготовлю подробный разбор.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Результат</h3>
+                    <p>Получите файл с разбором или проведём консультацию в удобном формате.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Портфолио</h2>
+            <p class="section-subtitle">Примеры моих работ — реальные разборы, прогнозы и отчёты. Нажмите на карточку, чтобы увидеть содержимое документа.</p>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="portfolio-card-header">
+                        <div class="portfolio-icon pdf">PDF</div>
+                        <div class="portfolio-card-header-info">
+                            <h3>Натальная карта под запрос клиента</h3>
+                            <span class="portfolio-file-type">PDF · Разбор карты</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-card-body">
+                        <p class="portfolio-description">Подробный разбор натальной карты с акцентом на профессиональное развитие, доход, публичность и отношения. Включает анализ ключевых показателей, напряжённых и гармоничных аспектов, а также практические выводы по сферам.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Натальная карта</span>
+                            <span class="portfolio-tag">Карьера</span>
+                            <span class="portfolio-tag">Доход</span>
+                            <span class="portfolio-tag">Отношения</span>
+                        </div>
+                        <button class="portfolio-view-btn" data-portfolio="natal">Открыть документ</button>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-card-header">
+                        <div class="portfolio-icon pdf">PDF</div>
+                        <div class="portfolio-card-header-info">
+                            <h3>Письменный отчёт для клиента</h3>
+                            <span class="portfolio-file-type">PDF · Письменный отчёт</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-card-body">
+                        <p class="portfolio-description">Полный письменный отчёт по натальной карте: потенциал личности, профессиональная реализация, доход и ресурсы, отношения и партнёрство, темы ближайшего периода и итоговые практические рекомендации.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Отчёт</span>
+                            <span class="portfolio-tag">Профессия</span>
+                            <span class="portfolio-tag">Финансы</span>
+                            <span class="portfolio-tag">Прогноз</span>
+                        </div>
+                        <button class="portfolio-view-btn" data-portfolio="report">Открыть документ</button>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-card-header">
+                        <div class="portfolio-icon docx">DOC</div>
+                        <div class="portfolio-card-header-info">
+                            <h3>Прогноз на неделю 16.11–22.11</h3>
+                            <span class="portfolio-file-type">DOCX · Прогноз</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-card-body">
+                        <p class="portfolio-description">Ежедневный прогноз на неделю с разбором возможностей, рисков и практических рекомендаций. Включает анализ транзитов, деловой сферы, финансовых тем и глубинного психологического фона.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Прогноз</span>
+                            <span class="portfolio-tag">Транзиты</span>
+                            <span class="portfolio-tag">Финансы</span>
+                            <span class="portfolio-tag">Рекомендации</span>
+                        </div>
+                        <button class="portfolio-view-btn" data-portfolio="forecast">Открыть документ</button>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-card-header">
+                        <div class="portfolio-icon docx">DOC</div>
+                        <div class="portfolio-card-header-info">
+                            <h3>Чарльз Спенсер Чаплин</h3>
+                            <span class="portfolio-file-type">DOCX · Полный разбор</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-card-body">
+                        <p class="portfolio-description">Развёрнутый разбор натальной карты Чарли Чаплина: общий профиль личности, динамика карты, профессиональное направление (сцена vs кино), личная жизнь, темы ближайшего года и план проведения консультации.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Разбор карты</span>
+                            <span class="portfolio-tag">Профессия</span>
+                            <span class="portfolio-tag">Личность</span>
+                            <span class="portfolio-tag">План консультации</span>
+                        </div>
+                        <button class="portfolio-view-btn" data-portfolio="chaplin">Открыть документ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <h2 class="section-title">Отзывы клиентов</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Марина</div>
+                            <div class="review-service">Натал-портрет</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Шла на разбор с кашей в голове: вроде бы и работа стабильная, и всё неплохо, но внутри постоянное ощущение, что живу не свою жизнь. Очень понравилось, что не было никакой мистики и запугивания — всё разложили чётко, по полочкам. Вы прямо подсветили мои сильные стороны, которые я сама привыкла обесценивать, и объяснили, почему в найме мне так тесно. После консультации ушла тревога, появился понятный план, в какую сторону двигаться дальше. Отдельное спасибо за PDF-конспект, перечитываю его, когда начинаю сомневаться в себе.
+                    </div>
+                    <div class="stars-badge">
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Алексей и Дарья</div>
+                            <div class="review-service">Совместимость</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Мы вместе три года, но в последнее время стали часто спорить на пустом месте — вроде оба хотим как лучше, а договориться не получается. Решили попробовать синастрию вместо очередного выяснения отношений. Оказалось, что мы просто по-разному реагируем на стресс и по-разному понимаем заботу: то, что для меня было поддержкой, для жены считывалось как контроль. Стало намного легче, когда увидели это со стороны и получили конкретные рекомендации, как сглаживать острые углы. Очень бережный и тактичный разбор, без оценок "подходите вы друг другу или нет".
+                    </div>
+                    <div class="stars-badge">
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Ольга</div>
+                            <div class="review-service">Прогноз</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Брала экспресс-прогноз на сложную рабочую неделю, когда нужно было провести два важных собеседования и подписать договор аренды. Вы предупредили, в какие дни лучше не торопиться с бумагами и перепроверять цифры, а когда, наоборот, нужно проявлять инициативу. В итоге в среду реально всплыла ошибка в договоре, которую я вовремя заметила, а в пятницу переговоры прошли идеально. Для меня такой формат оказался суперудобным — как сверка с прогнозом погоды перед тем, как выйти из дома.
+                    </div>
+                    <div class="stars-badge">
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Ксения</div>
+                            <div class="review-service">Соляр</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Заказывала соляр за пару недель до дня рождения, чтобы понимать, на чём вообще фокусироваться в новом году. Главный запрос был про финансы и возможный переезд. Вы сразу обозначили, что первая половина года уйдёт на закрытие старых хвостов и обучение, а реальное окно для переезда откроется только ближе к осени. Это уберегло меня от кучи лишней суеты и импульсивных трат весной! Очень ценно, что вы даёте не просто "предсказания", а подсказываете, как лучше распределять свои силы в течение года.
+                    </div>
+                    <div class="stars-badge">
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Дмитрий</div>
+                            <div class="review-service">Соляр</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Смотрел карту на следующий год. В ней был довольно сложный сектор про карьеру весной — я заранее подготовил «подушку» и не стал запускать рискованный проект. А удачный период для обучения летом использовал для курсов, которые сейчас дают реальный эффект. Спасибо за детальный разбор и за то, что давали инструменты, а не только «что будет».
+                    </div>
+                    <div class="stars-badge">
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">Наталья</div>
+                            <div class="review-service">Натал-портрет</div>
+                        </div>
+                    </div>
+                    <div class="review-text">
+                        Делала карту впервые и довольно скептически. В итоге получила не «страшный прогноз», а понятную схему: где мои сильные стороны, какие темы действительно важны, а чего лучше избегать. Теперь проще принимать решения. Спасибо за мягкий, вдумчивый разбор — это действительно помогло лучше понять себя.
+                    </div>
+                    <div class="stars-badge">
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                        <svg class="star-icon" viewBox="0 0 24 24"><path d="M12 2L14.5 9L22 9.5L16.5 14L18.5 21.5L12 17.5L5.5 21.5L7.5 14L2 9.5L9.5 9L12 2Z" fill="currentColor"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Частые вопросы перед консультацией</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>А вдруг вы увидите в карте что-то страшное — болезни, развод или кризис?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Нет, запугивания и фатальных приговоров на моих консультациях не бывает. В астрологии нет «плохих» или «обречённых» карт — есть напряжённые аспекты, которые показывают, где скапливается энергия и требуется ваше внимание. Моя задача — не напугать вас, а показать, как экологично направить эту энергию в действия, чтобы пройти сложный период спокойно и с пользой для себя.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Не лишит ли меня прогноз свободы выбора? Я боюсь «запрограммировать» себя.</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Натальная карта и транзиты — это не жёсткий сценарий, а навигатор с прогнозом погоды. Если навигатор предупреждает о дожде, вы не отменяете жизнь, а просто берёте зонт и выбираете удобную обувь. Вся ответственность и право выбора всегда остаются за вами: астрология лишь подсвечивает варианты, чтобы вы принимали решения с опорой на себя, а не вслепую.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Я не знаю точное время рождения (или знаю только приблизительно). Разбор вообще имеет смысл?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, даже без точного времени до минуты мы можем разобрать вашу космограмму: положение планет в знаках, ваши сильные стороны, таланты, особенности характера и совместимость с партнёром. Если же для ответа на ваш запрос (например, для прогноза на год) потребуется сетка домов, мы заранее обсудим, можно ли восстановить время по важным событиям вашей жизни (сделать ректификацию).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Это магия и эзотерика или более практичный инструмент?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>В своей работе я опираюсь на математически точные астрономические расчёты положения планет и интерпретацию символической системы. Здесь нет ритуалов, «снятия венцов безбрачия» или гаданий. Мы говорим на понятном, приземлённом языке о ваших привычках, сценариях поведения, ресурсах и подходящем времени для конкретных шагов в работе и отношениях.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>А если я разволнуюсь во время созвона и забуду всё, о чём мы говорили?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Об этом можно не переживать: я делаю видео- или аудиозапись нашей встречи и отправляю её вам сразу после консультации. Кроме того, вы получите краткий текстовый конспект (PDF-шпаргалку) с главными выводами и рекомендациями, к которому можно спокойно вернуться в любой момент.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Как мне подготовиться, чтобы консультация прошла максимально полезно?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Достаточно написать ваши дату, город и известное время рождения, а также сформулировать 2–3 вопроса, которые волнуют вас сильнее всего прямо сейчас. Не нужно пытаться «правильно» или красиво их упаковать — напишите так, как чувствуете, а я помогу структурировать запрос перед встречей.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Мои данные рождения и личная история точно останутся между нами?</h3>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>100% конфиденциально. Я строго соблюдаю профессиональную этику: ваши данные рождения, содержание нашей беседы и любые личные детали никогда не передаются третьим лицам и не публикуются в блоге без вашего прямого письменного согласия (и даже в этом случае — только полностью анонимно).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Готовы узнать больше о себе?</h2>
+            <p>Запишитесь на консультацию и получите персональный разбор вашей натальной карты. Начните путь к пониманию себя уже сегодня</p>
+            <a href="#contact" class="cta-dark-button">Записаться на консультацию</a>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Стоимость</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Письменный отчёт</h3>
+                    <div class="price">1800 <span>₽</span></div>
+                    <ul>
+                        <li>Подробный письменный отчёт</li>
+                        <li>Ответы на вопросы в мессенджере</li>
+                        <li>Формат: текст</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Выбрать</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>Аудио консультация</h3>
+                    <div class="price">2600 <span>₽</span></div>
+                    <ul>
+                        <li>Аудио консультация</li>
+                        <li>Подробный письменный отчёт</li>
+                        <li>Ответы на вопросы</li>
+                        <li>Формат: аудио + текст</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Выбрать</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Видео консультация</h3>
+                    <div class="price">3500 <span>₽</span></div>
+                    <ul>
+                        <li>Видео консультация через Zoom</li>
+                        <li>Подробный письменный отчёт</li>
+                        <li>Ответы на вопросы</li>
+                        <li>Формат: видео + текст</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Выбрать</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="disclaimer">
+        <div class="disclaimer-content">
+            <p>Консультация основана на астрологических данных. Не гадаю! В консультации не будет медицинских, психологических или юридических советов. Информация носит рекомендательный характер и не гарантирует точное предсказание событий. Окончательное решение всегда остаётся за вами.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Связаться со мной</h2>
+            <div class="contact-content">
+                <p>Готовы узнать больше о себе через звёзды? Напишите мне, и мы начнём путешествие к пониманию вашей уникальной карты.</p>
+                <div class="contact-buttons">
+                    <a href="https://t.me/lundfolk" class="contact-button" target="_blank">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                        <span>Telegram: @lundfolk</span>
+                    </a>
+                    <a href="https://vk.ru/lundfolk" class="contact-button" target="_blank">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.587-1.496c.598-.188 1.366 1.26 2.18 1.817.616.422 1.084.33 1.084.33l2.178-.03s1.14-.071.599-.97c-.044-.073-.314-.66-1.617-1.87-1.364-1.264-1.182-1.058.462-3.246.999-1.332 1.398-2.146 1.273-2.494-.12-.332-.856-.244-.856-.244l-2.45.015s-.182-.025-.317.056c-.131.079-.216.263-.216.263s-.387 1.03-.903 1.904c-1.088 1.848-1.524 1.946-1.702 1.832-.413-.266-.31-1.07-.31-1.64 0-1.784.27-2.524-.527-2.716-.265-.064-.459-.106-1.138-.113-.871-.009-1.608.003-2.024.207-.277.136-.491.438-.361.455.161.021.525.098.718.361.249.34.24 1.103.24 1.103s.143 2.099-.334 2.358c-.328.178-.778-.186-1.746-1.862-.495-.858-.868-1.807-.868-1.807s-.072-.176-.2-.271c-.155-.115-.372-.151-.372-.151l-2.327.015s-.35.01-.478.162c-.114.135-.009.413-.009.413s1.817 4.244 3.874 6.383c1.887 1.963 4.029 1.834 4.029 1.834h.971z"/></svg>
+                        <span>VK: lundfolk</span>
+                    </a>
+                    <a href="https://t.me/astrologiyadlyavseh" class="contact-button" target="_blank">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                        <span>Канал "Астро Пульс"</span>
+                    </a>
+                    <a href="https://dzen.ru/astrologiyadlyavseh" class="contact-button" target="_blank">
+                        <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <span>Дзен "Астрология сценариев"</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Анастасия Аллагузина. Все права защищены.</p>
+    </footer>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Документ</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const portfolioData = {
+            natal: {
+                title: 'Натальная карта под запрос клиента',
+                content: `
+                    <h2>Ключевые показатели карты</h2>
+                    <p><strong>Асцендент в Скорпионе</strong> — образ личности глубокий, проницательный, «с характером», человек производит впечатление того, кто видит суть и не любит поверхностности. Управитель I дома находится в VII доме — значительная часть самопроявления происходит через взаимодействие с другими: в партнёрстве, переговорах, публичном диалоге.</p>
+                    <p><strong>Солнце в Овне, Луна в Скорпионе.</strong></p>
+                    <p>Солнце в Овне даёт импульс, решительность, желание действовать и быть первым. Положение в VI доме смещает фокус: энергия лучше всего реализуется не в «показном лидерстве», а в труде, дисциплине, доведении процессов до результата.</p>
+                    <p>Луна в I доме в Скорпионе делает эмоции заметной частью образа: человек не скрывает вовлечённости, тонко считывает атмосферу, быстро замечает несоответствия. Это ресурс для актёрской работы (нюансы, подтекст), но и зона внимания: высокая чувствительность требует восстановления.</p>
+                    <h3>Основные аспекты</h3>
+                    <ul>
+                        <li><strong>Оппозиция Луна–Марс</strong> — импульсивность и напряжение в партнёрских темах</li>
+                        <li><strong>Секстиль Луна–Юпитер</strong> — способность восстанавливаться и видеть возможности</li>
+                        <li><strong>Квадратура Луна–Сатурн</strong> — внутренние рамки, необходимость дисциплины для эмоционального комфорта</li>
+                    </ul>
+                    <h3>Напряжённые и гармоничные аспекты</h3>
+                    <p><strong>Напряжённые:</strong> оппозиция Луна–Марс, квадратура Марс–Сатурн, квадратура Венера–Сатурн, оппозиция Меркурий–Уран — дают внутренний драйв, но и риск конфликтов, срывов планов, импульсивных решений.</p>
+                    <p><strong>Гармоничные:</strong> секстиль Луна–Юпитер, тригон Луна–Хирон, тригон Меркурий–Сатурн — помогают восстанавливаться, видеть варианты, структурировать идеи и доводить проекты до результата.</p>
+                    <h3>Практические выводы (кратко, по сферам)</h3>
+                    <ul>
+                        <li><strong>Карьера и переход в кино:</strong> опираться на дисциплину (Солнце в VI) и образность (V дом в Рыбах). Пробовать новые форматы поэтапно, сохранять опору в привычных проектах.</li>
+                        <li><strong>Доход:</strong> выстраивать прозрачные схемы оплаты, фиксировать договорённости.</li>
+                        <li><strong>Публичность:</strong> X дом во Льве поддерживает стремление к признанию — полезно продумать регулярную коммуникацию.</li>
+                        <li><strong>Отношения:</strong> заранее проговаривать границы и ожидания, особенно в профессиональных союзах.</li>
+                    </ul>
+                `
+            },
+            report: {
+                title: 'Письменный отчёт по натальной карте',
+                content: `
+                    <h2>Запрос клиента</h2>
+                    <p>Основной вопрос: «В каком направлении мне сейчас лучше развиваться профессионально, как использовать свои сильные стороны, на что обратить внимание в личной жизни и какие темы будут важны для меня в ближайший год?»</p>
+                    <p><em>Важное уточнение:</em> натальная карта не даёт гарантированных событий и не предписывает жёстких сценариев. Она помогает увидеть потенциал, зоны естественной силы, внутренние напряжения и варианты реализации. Решение всегда остаётся за вами.</p>
+                    <h2>Основные показатели натальной карты</h2>
+                    <ul>
+                        <li><strong>Солнце в Овне в VI доме</strong> — в работе хочется проявлять инициативу и видеть ощутимые результаты</li>
+                        <li><strong>Луна в Скорпионе в I доме</strong> — тонко чувствуете атмосферу и улавливаете подтекст</li>
+                        <li><strong>Меркурий в Овне в V доме</strong> — стиль мышления отличается живостью и прямотой</li>
+                        <li><strong>Сатурн во Льве в IX доме</strong> — важно не просто предлагать идеи, а проверять их на прочность</li>
+                        <li><strong>V дом в Рыбах + Нептун и Плутон в VII доме</strong> — склонность к образному, эмпатическому творчеству</li>
+                        <li><strong>Соединение Венера–Марс в VII доме</strong> — сочетание мягкости и напора придаёт выразительность и сценическую харизму</li>
+                    </ul>
+                    <h2>Профессиональная реализация</h2>
+                    <h3>Возможные карьерные направления:</h3>
+                    <ul>
+                        <li>Актёрство в кино — роли с психологической глубиной</li>
+                        <li>Комедийные форматы — где уместна динамика и напор</li>
+                        <li>Работа с партнёром и ансамблем</li>
+                        <li>Проектная и продюсерская деятельность</li>
+                    </ul>
+                    <h2>Доход и ресурсы</h2>
+                    <h3>Как можно зарабатывать:</h3>
+                    <ul>
+                        <li>Через профессиональную экспертизу и участие в масштабных проектах</li>
+                        <li>Через партнёрства, совместные проекты, агентские схемы</li>
+                        <li>За счёт тонкой работы над ролью и смежных услуг</li>
+                        <li>Параллельно в смежных нишах, для стабилизации дохода</li>
+                    </ul>
+                    <h2>Итоговые практические рекомендации</h2>
+                    <ol>
+                        <li>Пропишите «границы свободы» для себя и фиксируйте это в договорах</li>
+                        <li>Развивайте смежные навыки: озвучка, работа с микрофоном, монтаж</li>
+                        <li>Создайте систему поддержки: наставник/агент/коллеги</li>
+                        <li>Планируйте доход: 3–4 источника помогут снизить страх нестабильности</li>
+                    </ol>
+                `
+            },
+            forecast: {
+                title: 'Прогноз на неделю 16.11–22.11',
+                content: `
+                    <h2>16/11 — Эмоциональный фон и быт</h2>
+                    <p><strong>Аспект:</strong> Квадратура Транзитной Луны к Натальному Солнцу</p>
+                    <p>Сегодняшний день может пройти через период внутреннего напряжения. Личные амбиции и планы могут столкнуться с бытовыми обстоятельствами.</p>
+                    <p><strong>Главный совет:</strong> Не принимайте эту суету близко к сердцу. Отложите на сегодня: сделки с недвижимостью, начало ремонта, крупные спонтанные траты и выяснение отношений.</p>
+                    <h3>Деловая сфера, Интеллект и Финансы</h3>
+                    <p>Здесь складывается очень мощная и благоприятная картина, но требующая дисциплины. Отличное время для интеллектуальной работы, обучения, командировок и общения с иностранными партнерами.</p>
+                    <h2>17/11 — Главные возможности дня</h2>
+                    <p><strong>Интеллект, обучение и коммуникации:</strong> День идеален для долгосрочного планирования, заключения важных контрактов, обучения и работы с информацией.</p>
+                    <p><strong>Финансы, ресурсы и масштабные проекты:</strong> Прекрасное время для реформ, работы с крупным капиталом, совместными финансами.</p>
+                    <h2>18/11 — Деловые связи и обаяние</h2>
+                    <p>Вы сегодня на пике своей личной привлекательности. Это отличный день для официальных встреч, переговоров со спонсорами, поиска покровителей.</p>
+                    <h2>19/11 — Сила обаяния и покровительство</h2>
+                    <p>Вы сегодня привлекательны и убедительны. Это отличный момент для неформальных встреч, получения поддержки от начальства или влиятельных лиц.</p>
+                    <h2>20/11 — Главный тезис дня</h2>
+                    <p>«Улыбайтесь, используйте обаяние, но держите руку на пульсе и не начинайте ничего нового». Сегодня категорически не рекомендуется запускать новые бизнес-проекты, давать деньги в долг или идти на авантюры.</p>
+                    <h2>21/11 — Критические риски</h2>
+                    <p>Высокая конфликтность, дух противоречия, искажение информации. Любые новые сделки или подписи сегодня сработают не в вашу пользу.</p>
+                    <h2>22/11 — Итоговая стратегия</h2>
+                    <p>«Отступите от активных действий, не подписывайте документы и не спорьте. Используйте этот день не для завоевания нового, а для "генеральной уборки" в старых финансовых и рабочих вопросах».</p>
+                    <h3>Общие рекомендации на неделю:</h3>
+                    <ul class="check-list">
+                        <li>Учиться и планировать, изучать новую информацию</li>
+                        <li>Работать с чужими ресурсами: кредитование, страхование, налоги</li>
+                        <li>Проявлять милосердие и благотворительность</li>
+                    </ul>
+                    <ul class="cross-list">
+                        <li>Идти на финансовые авантюры и «серые» схемы</li>
+                        <li>Принимать важные решения на эмоциях</li>
+                        <li>Терять связь с реальностью</li>
+                    </ul>
+                `
+            },
+            chaplin: {
+                title: 'Чарльз Спенсер Чаплин — Разбор натальной карты',
+                content: `
+                    <h2>Общий профиль личности</h2>
+                    <p><strong>Восходящий знак — Весы, управитель Венера.</strong> Внешне вы можете производить впечатление мягкого, обаятельного, тактичного. Первая реакция на мир — через гармонию, эстетику, поиск баланса.</p>
+                    <p><strong>Солнце в Овне в экзальтации</strong> — воля, напор, потребность быть первым, действовать. Стоит оно в VI доме: энергия Овна здесь не направлена на самопрезентацию или творчество, а уходит в труд, дисциплину, совершенствование процессов.</p>
+                    <p><strong>Луна в Скорпионе в I доме</strong> — ваша эмоциональность — одна из самых ярких сторон личности. «Скорпионская» энергия добавляет этой эмоциональности глубины и интенсивности.</p>
+                    <h2>Общая динамика карты</h2>
+                    <h3>Преобладающие стихии</h3>
+                    <ul>
+                        <li><strong>Огонь (4):</strong> Солнце, Меркурий, Сатурн, Хирон</li>
+                        <li><strong>Земля (3):</strong> Венера, Марс, Юпитер</li>
+                        <li><strong>Воздух (5):</strong> Уран, Нептун, Плутон, Лилит, Прозерпина</li>
+                        <li><strong>Вода (3):</strong> Луна, Северный Узел, Селена</li>
+                    </ul>
+                    <h3>Акцентированные дома</h3>
+                    <p><strong>VII дом</strong> — самый загруженный: тема партнёрства пронизывает всю карту.</p>
+                    <p><strong>VI дом</strong> — работа, служба, здоровье, ежедневные процессы — вторая мощнейшая зона.</p>
+                    <p><strong>VIII дом</strong> — глубинная психология, чужие ресурсы, кризисы, трансформация.</p>
+                    <h2>Повторяющиеся темы</h2>
+                    <ol>
+                        <li><strong>Партнёрство как естественная среда для раскрытия потенциала</strong> — способность выстраивать связи, договариваться и создавать атмосферу доверия.</li>
+                        <li><strong>Труд и видимый результат как основа устойчивости</strong> — ценность ежедневной работы и конкретных усилий.</li>
+                        <li><strong>Глубина и способность к трансформации</strong> — выраженная психологическая глубина, не склонность скользить по поверхности.</li>
+                        <li><strong>Баланс между порывом и структурой</strong> — напряжение между импульсом и необходимостью соблюдать рамки.</li>
+                    </ol>
+                    <h2>Профессиональное направление: сцена vs кино</h2>
+                    <p>Ваша карта даёт очень сильный «сценический» фундамент и одновременно показывает потенциал для выхода на более широкую аудиторию — то есть кино вполне ложится на ваши астрологические показатели.</p>
+                    <h3>Сильные стороны для сцены и кино:</h3>
+                    <ul>
+                        <li>Солнце в VI доме — трудолюбие, исполнительность</li>
+                        <li>X дом во Льве — естественная потребность быть замеченным</li>
+                        <li>Венера в VII доме — умение нравиться публике</li>
+                        <li>Северный узел в IX доме — кармическая задача расширять горизонты</li>
+                    </ul>
+                    <h2>Практические рекомендации</h2>
+                    <ol>
+                        <li>Не сжигайте мосты со сценой — продолжайте участвовать в близких проектах</li>
+                        <li>Пробуйте кино поэтапно — начните с небольших ролей</li>
+                        <li>Развивайте навыки, востребованные в кино: работа с камерой, озвучка</li>
+                        <li>Ведите «дневник решений» для взвешенных выборов</li>
+                        <li>Обсуждайте ожидания с близкими заранее</li>
+                    </ol>
+                `
+            }
+        };
+
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+
+        document.querySelectorAll('.portfolio-view-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const portfolioKey = btn.getAttribute('data-portfolio');
+                const data = portfolioData[portfolioKey];
+                if (data) {
+                    modalTitle.textContent = data.title;
+                    modalBody.innerHTML = data.content;
+                    modalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        modalClose.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .step, .review-card, .faq-item, .pricing-card, .portfolio-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
